@@ -88,7 +88,7 @@ const path = require("path");
 const fs = require("fs");
 const { exec } = require("child_process");
 
-const FRONTEND_UPLOADS_PATH = path.resolve(__dirname, "../../frontend/public/uploads"); // Adjust as needed
+const FRONTEND_UPLOADS_PATH = path.resolve(__dirname, "../../frontend/uploads"); // Adjust as needed
 const BACKEND_UPLOADS_PATH = path.resolve(__dirname, "../uploads");
 
 // Ensure frontend uploads folder exists
