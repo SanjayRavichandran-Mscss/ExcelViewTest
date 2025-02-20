@@ -39,7 +39,7 @@ const app = express();
 // Configure CORS to accept requests from your Netlify frontend
 app.use(
   cors({
-    origin: "https://cerulean-marshmallow-8abfaf.netlify.app", // Allow only your Netlify frontend
+    origin: "https://exquisite-gingersnap-d304fc.netlify.app", // Allow only your Netlify frontend
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })

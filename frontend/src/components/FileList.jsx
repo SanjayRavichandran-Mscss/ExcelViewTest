@@ -68,7 +68,7 @@ const FileList = () => {
     const fetchFiles = async () => {
         try {
             // const res = await axios.get("http://localhost:5000/api/files"); // Ensure this is correct
-            const res = await axios.get("http://192.168.252.225:5000/api/files"); // Ensure this is correct
+            const res = await axios.get("https://excelviewtest.onrender.com/api/files"); // Ensure this is correct
             setFiles(res.data);
         } catch (error) {
             console.error("Failed to fetch files", error);
@@ -78,7 +78,7 @@ const FileList = () => {
     const handleEdit = async (fileName) => {
         try {
             // await axios.get(`http://localhost:5000/api/files/open/${fileName}`);
-            await axios.get(`http://192.168.252.225:5000/api/files/open/${fileName}`);
+            await axios.get(`https://excelviewtest.onrender.com/api/files/open/${fileName}`);
         } catch (error) {
             console.error("Error opening file:", error);
         }
@@ -87,7 +87,8 @@ const FileList = () => {
     const handleDownload = async (fileName) => {
         const link = document.createElement("a");
         // link.href = `http://localhost:5000/uploads/${fileName}`;
-        link.href = `http://192.168.252.225:5000/uploads/${fileName}`;
+        // link.href = `http://192.168.252.225:5000/uploads/${fileName}`;
+        link.href = `https://excelviewtest.onrender.com/uploads/${fileName}`;
         link.download = fileName;
         document.body.appendChild(link);
         link.click();

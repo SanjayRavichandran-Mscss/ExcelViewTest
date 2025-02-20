@@ -63,7 +63,7 @@ const FileUpload = () => {
 
         try {
             // await axios.post("http://localhost:5000/api/files/upload", formData);
-            await axios.post("http://192.168.252.225:5000/api/files/upload", formData);
+            await axios.post("https://excelviewtest.onrender.com/api/files/upload", formData);
             alert("File uploaded & synced!");
         } catch (error) {
             console.error("Upload failed", error);
