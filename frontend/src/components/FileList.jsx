@@ -1,3 +1,60 @@
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+
+// const FileList = () => {
+//     const [files, setFiles] = useState([]);
+
+//     useEffect(() => {
+//         fetchFiles();
+//     }, []);
+
+//     const fetchFiles = async () => {
+//         try {
+//             const response = await axios.get("http://localhost:5000/api/files/list");
+//             setFiles(response.data);
+//         } catch (error) {
+//             alert("Error fetching files");
+//         }
+//     };
+
+//     const handleEdit = async (fileName) => {
+//         try {
+//             await axios.get(`http://localhost:5000/api/files/open/${fileName}`);
+//         } catch (error) {
+//             alert("Error opening file");
+//         }
+//     };
+
+//     const handleDownload = async (fileName) => {
+//         window.open(`http://localhost:5000/api/files/download/${fileName}`, "_blank");
+//     };
+
+//     return (
+//         <div>
+//             <h2>Uploaded Files</h2>
+//             <ul>
+//                 {files.map((file, index) => (
+//                     <li key={index}>
+//                         {file} 
+//                         <button onClick={() => handleEdit(file)}>Edit</button>
+//                         <button onClick={() => handleDownload(file)}>Download</button>
+//                     </li>
+//                 ))}
+//             </ul>
+//         </div>
+//     );
+// };
+
+// export default FileList;
+
+
+
+
+
+
+
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -10,39 +67,48 @@ const FileList = () => {
 
     const fetchFiles = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/files/list");
-            setFiles(response.data);
+            // const res = await axios.get("http://localhost:5000/api/files"); // Ensure this is correct
+            const res = await axios.get("http://192.168.252.225:5000/api/files"); // Ensure this is correct
+            setFiles(res.data);
         } catch (error) {
-            alert("Error fetching files");
+            console.error("Failed to fetch files", error);
         }
     };
 
     const handleEdit = async (fileName) => {
         try {
-            await axios.get(`http://localhost:5000/api/files/open/${fileName}`);
+            // await axios.get(`http://localhost:5000/api/files/open/${fileName}`);
+            await axios.get(`http://192.168.252.225:5000/api/files/open/${fileName}`);
         } catch (error) {
-            alert("Error opening file");
+            console.error("Error opening file:", error);
         }
     };
 
     const handleDownload = async (fileName) => {
-        window.open(`http://localhost:5000/api/files/download/${fileName}`, "_blank");
+        const link = document.createElement("a");
+        // link.href = `http://localhost:5000/uploads/${fileName}`;
+        link.href = `http://192.168.252.225:5000/uploads/${fileName}`;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     return (
         <div>
             <h2>Uploaded Files</h2>
-            <ul>
-                {files.map((file, index) => (
-                    <li key={index}>
-                        {file} 
+            {files.length === 0 ? <p>No files uploaded</p> : (
+                files.map((file, index) => (
+                    <div key={index}>
+                        <span>{file}</span>
                         <button onClick={() => handleEdit(file)}>Edit</button>
                         <button onClick={() => handleDownload(file)}>Download</button>
-                    </li>
-                ))}
-            </ul>
+                    </div>
+                ))
+            )}
         </div>
     );
 };
 
 export default FileList;
+
