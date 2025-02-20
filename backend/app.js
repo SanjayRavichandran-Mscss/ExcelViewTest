@@ -72,7 +72,7 @@ const cors = require("cors");
 const fileRoutes = require("./routes/fileRoutes");
 
 const app = express();
-app.use(cors({ origin: "https://exquisite-gingersnap-d304fc.netlify.app" })); // Allow frontend
+app.use(cors({ origin: "https://fancy-dodol-c2863b.netlify.app" })); // Allow frontend
 app.use(express.json());
 
 // API Routes
