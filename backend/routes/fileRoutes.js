@@ -44,23 +44,25 @@
 
 
 
-
-
 const express = require("express");
+const multer = require("multer");
+const { uploadFile, downloadFile } = require("../controllers/fileController");
+
 const router = express.Router();
-const fileController = require("../controllers/fileController");
 
-// Upload File
-router.post("/upload", fileController.uploadFile);
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: "./uploads/",
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
+const upload = multer({ storage });
 
-// Get All Uploaded Files
-router.get("/", fileController.getFiles);
-
-// Download File
-router.get("/download/:filename", fileController.downloadFile);
-
-// Open File in MS Excel (Backend Approach)
-router.get("/open/:filename", fileController.openFile);
+// Routes
+router.post("/upload", upload.single("file"), uploadFile);
+router.get("/download/:fileName", downloadFile);
 
 module.exports = router;
+
 

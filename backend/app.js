@@ -30,27 +30,55 @@
 
 
 
+// const express = require("express");
+// const cors = require("cors");
+// const fileRoutes = require("./routes/fileRoutes");
+
+// const app = express();
+
+// // Configure CORS to accept requests from your Netlify frontend
+// app.use(
+//   cors({
+//     origin: "https://exquisite-gingersnap-d304fc.netlify.app", // Allow only your Netlify frontend
+//     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+//     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+//   })
+// );
+
+// app.use(express.json());
+
+// // API Routes
+// app.use("/api/files", fileRoutes);
+
+// // Serve static files from uploads folder
+// app.use("/uploads", express.static("uploads"));
+
+// const PORT = 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const cors = require("cors");
 const fileRoutes = require("./routes/fileRoutes");
 
 const app = express();
-
-// Configure CORS to accept requests from your Netlify frontend
-app.use(
-  cors({
-    origin: "https://exquisite-gingersnap-d304fc.netlify.app", // Allow only your Netlify frontend
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  })
-);
-
+app.use(cors({ origin: "https://exquisite-gingersnap-d304fc.netlify.app" })); // Allow frontend
 app.use(express.json());
 
 // API Routes
 app.use("/api/files", fileRoutes);
 
-// Serve static files from uploads folder
+// Serve static files from backend uploads
 app.use("/uploads", express.static("uploads"));
 
 const PORT = 5000;
